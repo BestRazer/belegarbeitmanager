@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lehreransicht</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="/" class="back-button">Zur Schüleransicht</a>
+    <h1>Lehreransicht</h1>
+    <form action="/submit_topic" method="POST">
+        <label for="topic">Thema:</label>
+        <input type="text" id="topic" name="topic" required>
+        <label for="topic">Fach:</label>
+        <input type="text" id="fach" name="fach" required>
+        <br><br>
+        <input type="submit" value="Thema hinzufügen">
+    </form>
+    <br>
+    <table>
+        <tr>
+            <th>Nr</th>
+            <th>Fach</th>
+            <th>Thema</th>
+            <th>Schüler</th>
+            <th></th>
+        </tr>
+        {% for registration in registrations %}
+            <tr>
+                <td>{{ registration[0] }}</td>
+                <td>{{ registration[1] }}</td>
+                <td>{{ registration[2] }}</td>
+                <td>
+                    {% if registration[3] == None %}
+                    <form action="/submit" method="POST">
+                        <span class="not-possible">Keine Eintragung</span>
+                    </form>
+                    {% else %}
+                    {{ registration[3] }}
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" name="topic_id" value="{{ registration[0] }}">
+                        <input type="submit" value="Löschen">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

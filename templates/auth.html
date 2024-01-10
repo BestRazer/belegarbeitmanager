@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authentifizierung</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Authentifizierung</h1>
+    <form action="/teacher" method="POST">
+        <label for="auth_code">Authentifizierungscode:</label>
+        <input type="password" id="auth_code" name="auth_code" required>
+        <br><br>
+        <input type="submit" value="Einloggen">
+    </form>
+</body>
+</html>

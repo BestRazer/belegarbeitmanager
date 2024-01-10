@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Themenliste</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <a href="/teacher" class="teacher-button">Zur Lehreransicht</a>
+    <h1>Themenliste</h1>
+    <br>
+    <table>
+        <tr>
+            <th>Nr</th>
+            <th>Fach</th>
+            <th>Thema</th>
+            <th></th>
+        </tr>
+        {% for topic in topics %}
+        <tr>
+            <td>{{ topic[0] }}</td>
+            <td>{{ topic[2] }}</td>
+            <td>{{ topic[1] }}</td>
+            <td>
+                {% if topic[3] == 0 %}
+                <form action="/submit" method="POST">
+                    <input type="hidden" name="topic_id" value="{{ topic[0] }}">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="submit" value="Eintragen">
+                </form>
+                {% else %}
+                <span class="not-possible">Eintragung nicht möglich</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

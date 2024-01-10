@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Themenübersicht</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Themenübersicht</h1>
+    <table>
+        <tr>
+            <th>Thema</th>
+            <th>Schülername</th>
+        </tr>
+        {% for registration in registrations %}
+            <tr>
+                <td>{{ registration[0] }}</td>
+                <td>{{ registration[1] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
