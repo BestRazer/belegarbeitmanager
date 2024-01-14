@@ -8,6 +8,9 @@
 <body>
     <a href="/teacher" class="teacher-button">Zur Lehreransicht</a>
     <h1>Themenliste</h1>
+    {% if success %}
+    <p style="color:red">{{ success }}</p>
+    {% endif %}
     <br>
     <table>
         <tr>

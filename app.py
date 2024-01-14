@@ -38,11 +38,14 @@ def submit():
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(id) FROM registrations WHERE topic_id = ?", (topic_id,))
     count = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(id) FROM registrations WHERE student_name = ?", (student_name,))
+    student_count = cursor.fetchone()[0]
     if count == 0:
-        cursor.execute("INSERT INTO registrations (topic_id, student_name) VALUES (?, ?)", (topic_id, student_name))
-        conn.commit()
+        if student_count == 0:
+            cursor.execute("INSERT INTO registrations (topic_id, student_name) VALUES (?, ?)", (topic_id, student_name))
+            conn.commit()
     conn.close()
-    return redirect('/')
+    return "Schüler " + student_name + " ist bereits eingetragen."
 
 @app.route('/submit_topic', methods=['POST'])
 def submit_topic():
